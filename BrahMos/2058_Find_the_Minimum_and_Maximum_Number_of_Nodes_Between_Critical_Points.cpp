@@ -12,7 +12,7 @@ public:
         int index = 1;
         int fcp = -1, pcp = -1; 
         int minDist = INT_MAX;
-
+ 
         while (nxt != nullptr)
         {
             if ((curr->val > prev->val && curr->val > nxt->val) ||
