@@ -1,6 +1,6 @@
 class Solution
 {
-public:
+public: 
     string pushDominoes(string dominoes)
     {
         int n = dominoes.size();
