@@ -1,10 +1,11 @@
-# Stack using the list
+# Stack using the list 
 stack=[]
 #push
 stack.append(10)
 stack.append(20)
 stack.append(30)
-
+stack.append(40)
+stack.append(50)
 #pop
 print("Stack pop: ",stack.pop()) 
 #top
