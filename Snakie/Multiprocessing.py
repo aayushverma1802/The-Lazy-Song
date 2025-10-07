@@ -14,12 +14,11 @@ def print_squre(num):
 
 if __name__=="__main__":
     #creating prcosses
-    p1=multiprocessing.Process(target=print_squre,args=(10,))
-    p2=multiprocessing.Process(target=print_cube,args=(10,))
-
+    p1=multiprocessing.Process(print_squre(10,))
+    p2=multiprocessing.Process(target=print_cube(10))
     #Starting process 1
     p1.start()
-    #Starting process 2
+    #Starting process 2 
     p2.start()
     #wait until the process 2 is finished
     p2.join()
