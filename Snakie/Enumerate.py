@@ -6,3 +6,7 @@ for index,number in enumerate(a):
     print(number)
     if(index==3):
         print(index)
+for number in enumerate(a):
+    print(number)
+    # if(index==3):
+    #     print(index)
