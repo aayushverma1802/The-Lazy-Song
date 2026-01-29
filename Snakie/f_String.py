@@ -11,4 +11,8 @@ for i in l:
         print('({},{})'.format(i,j))
 
 
-        
+    
+name="aayush"
+age=18
+print(f"hello my name is {name} and age is {age}")
+print(f"hello my name is {{name}} and age us {{age}}")

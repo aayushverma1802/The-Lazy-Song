@@ -1,0 +1,23 @@
+#String are immutable
+a="!!Welcome!!"
+print(len(a))
+print(a.upper())
+print(a.lower())
+print(a.strip('!'))
+print(a.rstrip('!'))
+print(a.replace("Welcome","No welcome"))
+print(a.split(" "))
+print("neW".capitalize())
+str1="Welcome to my Py"
+print(str1.center(50))
+print(a.count("Welcome"))
+print(a.endswith('!'))
+print(a.endswith('!',4,10))
+print(a.find("Welcome"))
+print(a.index("Welcome"))
+print(a.isalnum())
+print(a.islower())
+print("Welcome \n".isprintable())
+print(" ".isspace())
+print("Hello Is This Python".istitle())
+print(a.swapcase())
