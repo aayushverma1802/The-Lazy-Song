@@ -1,82 +1,69 @@
-class PriorityQueue {
-    constructor() {
-        this.queue = [];
-    }
+# Python program for the above approach
+import heapq
 
-    enqueue(element) {
-        this.queue.push(element);
-        this.queue.sort((a, b) => a[0] - b[0]);
-    }
+# This class represents a directed graph using
+# adjacency list representation
+class Graph:
+    def __init__(self, V):
+        self.V = V  # No. of vertices
+        self.adj = [[] for _ in range(V)]  # In a weighted graph, store vertex and weight pair for every edge
 
-    dequeue() {
-        if (this.isEmpty()) return "Queue is empty";
-        return this.queue.shift();
-    }
+    # Function to add an edge to the graph
+    def add_edge(self, u, v, w):
+        self.adj[u].append((v, w))
+        self.adj[v].append((u, w))
 
-    isEmpty() {
-        return this.queue.length === 0;
-    }
-}
+    # Prints shortest paths from src to all other vertices
+    def shortest_path(self, src):
+        # Create a priority queue to store vertices that
+        # are being preprocessed.
+        pq = [(0, src)]  # The first element of the tuple is the distance, and the second is the vertex label
 
-class Graph {
-    constructor(V) {
-        this.V = V;
-        this.adj = new Array(V).fill().map(() => []);
-    }
+        # Create a list for distances and initialize all
+        # distances as infinite (INF)
+        dist = [float('inf')] * self.V
+        dist[src] = 0
 
-    addEdge(u, v, w) {
-        this.adj[u].push([v, w]);
-        this.adj[v].push([u, w]);
-    }
+        # Looping until the priority queue becomes empty
+        while pq:
+            # The first element in the tuple is the minimum distance vertex
+            # Extract it from the priority queue
+            current_dist, u = heapq.heappop(pq)
 
-    shortestPath(src) {
-        const pq = new PriorityQueue();
-        const dist = new Array(this.V).fill(Infinity);
+            # Iterate over all adjacent vertices of a vertex
+            for v, weight in self.adj[u]:
+                # If there is a shorter path to v through u
+                if dist[v] > dist[u] + weight:
+                    # Update the distance of v
+                    dist[v] = dist[u] + weight
+                    heapq.heappush(pq, (dist[v], v))
 
-        pq.enqueue([0, src]);
-        dist[src] = 0;
+        # Print shortest distances
+        print("Vertex Distance from Source")
+        for i in range(self.V):
+            print(f"{i}\t\t{dist[i]}")
 
-        while (!pq.isEmpty()) {
-            const [uDist, u] = pq.dequeue();
+# Driver program to test methods of the graph class
+if __name__ == "__main__":
+    # Create the graph given in the above figure
+    V = 9
+    g = Graph(V)
 
-            for (const [v, weight] of this.adj[u]) {
-                if (dist[v] > dist[u] + weight) {
-                    dist[v] = dist[u] + weight;
-                    pq.enqueue([dist[v], v]);
-                }
-            }
-        }
+    # Making the above-shown graph
+    g.add_edge(0, 1, 4)
+    g.add_edge(0, 7, 8)
+    g.add_edge(1, 2, 8)
+    g.add_edge(1, 7, 11)
+    g.add_edge(2, 3, 7)
+    g.add_edge(2, 8, 2)
+    g.add_edge(2, 5, 4)
+    g.add_edge(3, 4, 9)
+    g.add_edge(3, 5, 14)
+    g.add_edge(4, 5, 10)
+    g.add_edge(5, 6, 2)
+    g.add_edge(6, 7, 1)
+    g.add_edge(6, 8, 6)
+    g.add_edge(7, 8, 7)
 
-        console.log("Vertex Distance from Source");
-        for (let i = 0; i < this.V; ++i) {
-            console.log(i + "\t\t" + dist[i]);
-        }
-    }
-}
+    g.shortest_path(0)
 
-// Driver program to test methods of the graph class
-function main() {
-    // create the graph given in the provided C++ code
-    const V = 9;
-    const g = new Graph(V);
-
-    g.addEdge(0, 1, 4);
-    g.addEdge(0, 7, 8);
-    g.addEdge(1, 2, 8);
-    g.addEdge(1, 7, 11);
-    g.addEdge(2, 3, 7);
-    g.addEdge(2, 8, 2);
-    g.addEdge(2, 5, 4);
-    g.addEdge(3, 4, 9);
-    g.addEdge(3, 5, 14);
-    g.addEdge(4, 5, 10);
-    g.addEdge(5, 6, 2);
-    g.addEdge(6, 7, 1);
-    g.addEdge(6, 8, 6);
-    g.addEdge(7, 8, 7);
-
-    g.shortestPath(0);
-}
-
-// Call the main function
-main();
