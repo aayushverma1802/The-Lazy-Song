@@ -1,10 +1,9 @@
-# Definition for a binary tree node.
-# class TreeNode:
-#     def __init__(self, val=0, left=None, right=None):
-#         self.val = val
-#         self.left = left
-#         self.right = right
-
+from typing import Optional
+class TreeNode:
+    def __init__(self, val=0, left=None, right=None):
+        self.val = val
+        self.left = left
+        self.right = right
 class Solution:
     ans=float('-inf')
     def Height(self, root: Optional[TreeNode])-> int:
@@ -12,7 +11,7 @@ class Solution:
             return 0
         l=self.Height(root.left)
         if l<0:
-            l=0
+            l=0  
         r=self.Height(root.right)
         if r<0:
             r=0
@@ -23,4 +22,4 @@ class Solution:
             return 0
         self.Height(root)
         return self.ans
-# py
+  
